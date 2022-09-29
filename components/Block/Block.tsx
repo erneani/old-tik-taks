@@ -9,6 +9,8 @@ export enum BlockTypes {
 
 interface IBlock {
   type: BlockTypes;
+  value?: number[];
+  onClick?: (blockType: BlockTypes, value: number[]) => void;
 }
 
 const Wrapper = styled.div`
@@ -21,6 +23,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const CircleWrapper = styled(Wrapper)`
@@ -31,22 +34,28 @@ const CrossWrapper = styled(Wrapper)`
   background-color: #e3170a;
 `;
 
-const Block = ({ type }: IBlock) => {
+const Block = ({ type, value, onClick }: IBlock) => {
+  function handleClick() {
+    if (onClick && value) {
+      onClick(type, value);
+    }
+  }
+
   if (type === BlockTypes.circle)
     return (
-      <CircleWrapper>
+      <CircleWrapper onClick={handleClick}>
         <Image src="/assets/circle.svg" width="90" height="90" alt="A circle" />
       </CircleWrapper>
     );
 
   if (type === BlockTypes.cross)
     return (
-      <CrossWrapper>
+      <CrossWrapper onClick={handleClick}>
         <Image src="/assets/cross.svg" width="75" height="75" alt="A cross" />
       </CrossWrapper>
     );
 
-  return <Wrapper>neutral</Wrapper>;
+  return <Wrapper onClick={handleClick} />;
 };
 
 export default Block;
