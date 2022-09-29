@@ -1,28 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { BlockTypes } from "../../components/Block/Block";
-
-const Container = styled.main`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-`;
-
-const Title = styled.h1`
-  font-size: 94px;
-  margin: 0;
-`;
-
-const CrossTitle = styled(Title)`
-  color: #e3170a;
-`;
-
-const CircleTitle = styled(Title)`
-  color: #09bc8a;
-`;
 
 const winnerData = {
   name: localStorage.getItem("winner") || "Unknown",
@@ -33,8 +11,9 @@ const Winner = () => {
   const router = useRouter();
 
   useEffect(() => {
+    localStorage.clear();
+
     setTimeout(() => {
-      localStorage.clear();
       router.push("/welcome");
     }, 7000);
   }, [router]);
@@ -63,5 +42,26 @@ const Winner = () => {
     </Container>
   );
 };
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+const Title = styled.h1`
+  font-size: 94px;
+  margin: 0;
+`;
+
+const CrossTitle = styled(Title)`
+  color: #e3170a;
+`;
+
+const CircleTitle = styled(Title)`
+  color: #09bc8a;
+`;
 
 export default Winner;

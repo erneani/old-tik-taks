@@ -1,5 +1,5 @@
-import { BlockTypes } from "../../components/Block/Block";
-import { GameType } from "../../components/Board/Board";
+import { BlockTypes } from "../../components/Block/types";
+import { GameType } from "../../components/Board/types";
 
 export function checkWinConditions(board: GameType): BlockTypes {
   let winner = BlockTypes.neutral;

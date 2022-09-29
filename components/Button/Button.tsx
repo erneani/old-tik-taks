@@ -5,6 +5,10 @@ interface IButton {
   action: () => void;
 }
 
+const Button = ({ label, action }: IButton) => {
+  return <Wrapper onClick={action}>{label}</Wrapper>;
+};
+
 const Wrapper = styled.button`
   background-color: #6290c3;
   padding: 8px 16px;
@@ -15,9 +19,5 @@ const Wrapper = styled.button`
   border-radius: 10px;
   cursor: pointer;
 `;
-
-const Button = ({ label, action }: IButton) => {
-  return <Wrapper onClick={action}>{label}</Wrapper>;
-};
 
 export default Button;

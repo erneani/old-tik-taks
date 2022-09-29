@@ -1,26 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Block from "../Block";
-import { BlockTypes } from "../Block/Block";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const BlockWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-`;
-
-export type GameType = BlockTypes[][];
-
-export interface IBoard {
-  game: GameType;
-  onClick: (type: BlockTypes, value: number[]) => void;
-}
+import { IBoard } from "./types";
 
 const Board = ({ game, onClick }: IBoard) => {
   return (
@@ -40,5 +20,17 @@ const Board = ({ game, onClick }: IBoard) => {
     </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const BlockWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
 
 export default Board;

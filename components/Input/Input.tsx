@@ -6,6 +6,16 @@ interface IInput {
   onChange: (event: any) => void;
 }
 
+const Input = ({ text, value, onChange }: IInput) => {
+  return (
+    <Wrapper>
+      <Label>{text}</Label>
+      <InputStyled value={value} onChange={onChange} />
+      <small>Must be filled</small>
+    </Wrapper>
+  );
+};
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,15 +32,5 @@ const InputStyled = styled.input`
   max-width: 330px;
   font-size: 18px;
 `;
-
-const Input = ({ text, value, onChange }: IInput) => {
-  return (
-    <Wrapper>
-      <Label>{text}</Label>
-      <InputStyled value={value} onChange={onChange} />
-      <small>Must be filled</small>
-    </Wrapper>
-  );
-};
 
 export default Input;

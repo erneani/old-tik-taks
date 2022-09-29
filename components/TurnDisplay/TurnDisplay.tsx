@@ -1,24 +1,10 @@
 import styled from "styled-components";
-import { BlockTypes } from "../Block/Block";
+import { BlockTypes } from "../Block/types";
 
 interface ITurnDisplay {
   playerName: string;
   playerFigure: BlockTypes;
 }
-
-const Wrapper = styled.h1`
-  font-size: 94px;
-  font-weight: bold;
-  margin: 0;
-`;
-
-const CrossSpan = styled.span`
-  color: #e3170a;
-`;
-
-const CircleSpan = styled.span`
-  color: #09bc8a;
-`;
 
 const TurnDisplay = ({ playerName, playerFigure }: ITurnDisplay) => {
   switch (playerFigure) {
@@ -36,5 +22,19 @@ const TurnDisplay = ({ playerName, playerFigure }: ITurnDisplay) => {
       );
   }
 };
+
+const Wrapper = styled.h1`
+  font-size: 94px;
+  font-weight: bold;
+  margin: 0;
+`;
+
+const CrossSpan = styled.span`
+  color: #e3170a;
+`;
+
+const CircleSpan = styled.span`
+  color: #09bc8a;
+`;
 
 export default TurnDisplay;

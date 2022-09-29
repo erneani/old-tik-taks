@@ -1,25 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BlockTypes } from "../../components/Block/Block";
+import { BlockTypes } from "../../components/Block/types";
 import Board from "../../components/Board";
-import { IBoard } from "../../components/Board/Board";
+import { GameType } from "../../components/Board/types";
 import TurnDisplay from "../../components/TurnDisplay";
 import { defaultBoard } from "./constants";
 import { checkWinConditions } from "./gameEngine";
-
-type Turn = {
-  actualPlayer: string;
-  actualFigure: BlockTypes;
-};
-
-const Wrapper = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  padding: 126px;
-`;
+import { Turn } from "./types";
 
 const players = {
   cross: localStorage.getItem("cross") || "Cross",
@@ -33,7 +21,7 @@ const Game = () => {
     setBoard(defaultBoard);
   }, []);
 
-  const [board, setBoard] = useState<IBoard["game"]>(defaultBoard);
+  const [board, setBoard] = useState<GameType>(defaultBoard);
 
   const [turn, setTurn] = useState<Turn>({
     actualFigure: BlockTypes.circle,
@@ -87,5 +75,13 @@ const Game = () => {
     </Wrapper>
   );
 };
+
+const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 126px;
+`;
 
 export default Game;
