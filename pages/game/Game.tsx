@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Block, { BlockTypes } from "../../components/Block/Block";
+import { BlockTypes } from "../../components/Block/Block";
 import Board from "../../components/Board";
 import { IBoard } from "../../components/Board/Board";
 import TurnDisplay from "../../components/TurnDisplay";
@@ -22,11 +22,17 @@ const Wrapper = styled.main`
 `;
 
 const players = {
-  cross: "Luiza",
-  circle: "Vinicius",
+  cross: localStorage.getItem("cross") || "Cross",
+  circle: localStorage.getItem("circle") || "Circle",
 };
 
 const Game = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    setBoard(defaultBoard);
+  }, []);
+
   const [board, setBoard] = useState<IBoard["game"]>(defaultBoard);
 
   const [turn, setTurn] = useState<Turn>({
@@ -59,8 +65,16 @@ const Game = () => {
     switchPlayer();
 
     if (checkWinConditions(newBoard) !== BlockTypes.neutral) {
-      alert(`${turn.actualPlayer} is the Winner!`);
+      handleWin();
     }
+  }
+
+  function handleWin() {
+    setBoard(defaultBoard);
+    alert(`${turn.actualPlayer} is the Winner!`);
+    localStorage.setItem("winner", turn.actualPlayer);
+    localStorage.setItem("winner-figure", BlockTypes[turn.actualFigure]);
+    router.push("winner");
   }
 
   return (

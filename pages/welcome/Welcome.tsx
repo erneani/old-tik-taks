@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import Block from "../../components/Block";
@@ -36,12 +37,16 @@ const InputWrapper = styled.div`
 `;
 
 const Welcome = () => {
+  const router = useRouter();
+
   const [cross, setCross] = useState("");
   const [circle, setCircle] = useState("");
 
   function handlePlay() {
     if (cross.length > 0 && circle.length > 0) {
-      console.log("Move to Play arena");
+      localStorage.setItem("cross", cross);
+      localStorage.setItem("circle", circle);
+      router.push("/game");
     } else {
       alert("Os dois jogadores precisam inserir os nomes");
     }

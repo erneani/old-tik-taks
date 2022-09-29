@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { BlockTypes } from "../../components/Block/Block";
 
@@ -7,6 +8,7 @@ const Container = styled.main`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 `;
 
 const Title = styled.h1`
@@ -22,14 +24,42 @@ const CircleTitle = styled(Title)`
   color: #09bc8a;
 `;
 
+const winnerData = {
+  name: localStorage.getItem("winner") || "Unknown",
+  figure: localStorage.getItem("winner-figure") || "Cross",
+};
+
 const Winner = () => {
   const router = useRouter();
 
-  const { winner } = router.query;
+  useEffect(() => {
+    setTimeout(() => {
+      localStorage.clear();
+      router.push("/welcome");
+    }, 7000);
+  }, [router]);
+
+  if (winnerData.figure === "circle") {
+    return (
+      <Container>
+        <CircleTitle>{winnerData.name}</CircleTitle>
+        <Title> won!</Title>
+      </Container>
+    );
+  }
+
+  if (winnerData.figure === "cross") {
+    return (
+      <Container>
+        <CrossTitle>{winnerData.name}</CrossTitle>
+        <Title> won!</Title>
+      </Container>
+    );
+  }
 
   return (
     <Container>
-      <Title>{winner} won!</Title>
+      <Title>{winnerData.name} won!</Title>
     </Container>
   );
 };
